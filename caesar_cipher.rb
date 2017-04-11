@@ -1,6 +1,3 @@
-#cipher takes a string, converts each character to a number, adds the specified
-#offset to the characters, and converts the numbers back into a string
-
 
 def caesar_cipher(string, offset)
   coded = ''
