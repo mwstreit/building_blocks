@@ -1,18 +1,22 @@
 #takes an array of stock prices, one for each day.  returns a pair of days
 #best day to buy and best day to sell.  Days start at 0. must buy before selling
 
-stock_price = [17,3,6,9,15,8,6,1,10]
+prices = [13,3,6,9,15,8,6,1,10]
 
-def stock_picker(stock_price)
-
-  sell_price = stock_price[1..stock_price.length].max #find highest price that isn't the first entry
-  sell = stock_price.index(sell_price) #find index of highest price
-  buy_price = stock_price[0..sell].min #find lowest price that comes before the highest price
-  buy = stock_price.index(buy_price) #find index of lowest price
-
-  puts "Buy: #{buy}, Sell: #{sell}"
-  puts "Profit: $#{sell_price - buy_price}"
-
+def stock_picker(prices)
+  profit = 0
+  buy_day = 0
+  sell_day = 0
+  prices.each_with_index do |buy, day|
+    prices.each_with_index do |sell, day2|
+      if day2 > day && sell - buy > profit
+        profit = sell - buy
+        buy_day = day
+        sell_day = day2
+      end
+    end
+  end
+  puts "Buy on day #{buy_day}, sell on day #{sell_day} for a profit of $#{profit}"
 end
 
-stock_picker(stock_price)
+stock_picker(prices)
